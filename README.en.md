@@ -1,0 +1,223 @@
+# LibreLink MCP Server - Fixed for API v4.16.0
+
+🇬🇧 [English](README.en.md) | 🇮🇹 [Italiano](README.md)
+
+🩸 MCP Server to access FreeStyle Libre glucose data through Claude Desktop.
+
+**This is a fixed version** that supports the API changes introduced on October 8, 2025:
+- ✅ Support for API version 4.16.0+
+- ✅ Required `Account-Id` header (SHA256 hash of userId)
+- ✅ Automatic regional redirect handling
+- ✅ Automatic token refresh
+
+## 🚀 Quick Start
+
+```bash
+# Install dependencies
+npm install
+
+# Build TypeScript
+npm run build
+
+# Configure credentials
+npm run configure
+
+# Test the connection
+node test-real-connection.js
+```
+
+## 📋 Prerequisites
+
+- **Node.js**: Version 18.0.0 or higher
+- **LibreLinkUp Account**: Active account with shared data
+- **Sensor**: Active FreeStyle Libre 2 or 3
+- **Claude Desktop**: For MCP integration
+
+## 🔧 Configuration
+
+### 1. Configure credentials
+
+```bash
+npm run configure
+```
+
+You will be asked for:
+- **Email**: Your LibreLinkUp account email
+- **Password**: Your account password
+- **Region**: EU, US, DE, FR, AP, AU
+- **Target range**: Target glucose values (default: 70-180 mg/dL)
+
+### 2. Test the connection
+
+```bash
+node test-real-connection.js
+```
+
+### 3. Configure Claude Desktop
+
+Add to your Claude Desktop configuration file:
+
+**Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+**macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "librelink": {
+      "command": "node",
+      "args": ["C:/path/to/librelink-mcp-server-fixed/dist/index.js"]
+    }
+  }
+}
+```
+
+### 4. Restart Claude Desktop
+
+Restart Claude Desktop to load the MCP server.
+
+## 🛠 Available MCP Tools
+
+| Tool | Description |
+|------|-------------|
+| `get_current_glucose` | Current glucose reading with trend |
+| `get_glucose_history` | Glucose history (default: 24 hours) |
+| `get_glucose_stats` | Statistics: average, GMI, time-in-range |
+| `get_glucose_trends` | Pattern analysis: dawn phenomenon, stability |
+| `get_sensor_info` | Active sensor info |
+| `configure_credentials` | Configure LibreLinkUp credentials |
+| `configure_ranges` | Set custom target ranges |
+| `validate_connection` | Test the connection |
+
+## 💬 Usage Examples
+
+Once integrated with Claude Desktop, you can ask:
+
+- *"What's my current glucose level?"*
+- *"Show me my glucose history for the last 6 hours"*
+- *"Calculate my time-in-range for this week"*
+- *"Analyze my glucose patterns"*
+- *"Do I have dawn phenomenon?"*
+
+## 📊 Sample Output
+
+### Current Reading
+
+```json
+{
+  "current_glucose": 105,
+  "timestamp": "2025-12-06T16:30:00.000Z",
+  "trend": "Flat",
+  "status": "Normal",
+  "color": "green"
+}
+```
+
+### Statistics
+
+```json
+{
+  "analysis_period_days": 7,
+  "average_glucose": 112.5,
+  "glucose_management_indicator": 5.94,
+  "time_in_range": {
+    "target_70_180": 85.2,
+    "below_70": 2.1,
+    "above_180": 12.7
+  },
+  "variability": {
+    "standard_deviation": 28.4,
+    "coefficient_of_variation": 25.2
+  }
+}
+```
+
+## 🔒 Security & Privacy
+
+- **Local processing** - No data sent to external servers
+- **Local credentials** - Stored in `~/.librelink-mcp/config.json`
+- **File permissions** - Automatically set to 600 (user only)
+- **No tracking** - Zero telemetry
+
+## ⚠️ API v4.16.0 Fix (October 2025)
+
+### The Problem
+
+On October 8, 2025, Abbott made mandatory:
+1. `version` header with minimum value `4.16.0`
+2. `Account-Id` header containing the SHA256 hash of the userId
+
+### The Solution
+
+This fork automatically generates the `Account-Id` after login:
+
+```typescript
+import { createHash } from 'crypto';
+
+// userId comes from the login response
+const userId = loginResponse.data.user.id;
+const accountId = createHash('sha256').update(userId).digest('hex');
+
+// The header is added to all authenticated requests
+headers['Account-Id'] = accountId;
+```
+
+## 🐛 Troubleshooting
+
+### Error 403 with `minimumVersion`
+
+```json
+{"data":{"minimumVersion":"4.16.0"},"status":920}
+```
+
+**Solution:** You're using an old version. Use this updated fork.
+
+### Error `RequiredHeaderMissing`
+
+**Solution:** The `Account-Id` header is not being sent. Use this fork which includes it automatically.
+
+### No connections found
+
+**Solutions:**
+1. Open the LibreLinkUp app and accept the new Terms and Conditions
+2. Verify that someone is sharing data with you
+3. Make sure you're using LibreLinkUp credentials (not LibreLink)
+
+### Authentication error
+
+**Solutions:**
+1. Verify email and password
+2. Try logging in from the official LibreLinkUp app
+3. Check the region (EU vs US)
+
+## 📁 Project Structure
+
+```
+librelink-mcp-server-fixed/
+├── src/
+│   ├── index.ts              # Main MCP server
+│   ├── librelink-client.ts   # API client with v4.16.0 fix
+│   ├── glucose-analytics.ts  # Analytics and statistics
+│   ├── config.ts             # Configuration management
+│   ├── configure.ts          # CLI configuration tool
+│   └── types.ts              # TypeScript definitions
+├── config/
+│   └── default.json          # Default configuration
+├── dist/                     # Compiled files
+├── test-real-connection.js   # Connection test
+├── package.json
+└── README.md
+```
+
+## 📜 License
+
+MIT License
+
+## 🙏 Credits
+
+- Original fork: [amansk/librelink-mcp-server](https://github.com/amansk/librelink-mcp-server)
+- API Documentation: [khskekec/libre-link-up-http-dump](https://gist.github.com/khskekec/6c13ba01b10d3018d816706a32ae8ab2)
+- MCP Protocol: [Anthropic](https://modelcontextprotocol.io)
+
+---
+
+**Disclaimer**: This is an unofficial project, not affiliated with Abbott or FreeStyle Libre. Use responsibly and always consult healthcare professionals for medical decisions.

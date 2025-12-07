@@ -1,5 +1,7 @@
 # LibreLink MCP Server - Fixed for API v4.16.0
 
+🇬🇧 [English](README.en.md) | 🇮🇹 [Italiano](README.md)
+
 🩸 Server MCP per accedere ai dati glicemici FreeStyle Libre tramite Claude Desktop.
 
 **Questa è una versione corretta** che supporta le modifiche API introdotte l'8 ottobre 2025:
