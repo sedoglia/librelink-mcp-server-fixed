@@ -21,7 +21,9 @@
 - **Sensor**: Active FreeStyle Libre 2 or 3
 - **Claude Desktop**: For MCP integration
 
-## 🚀 Quick Start
+## 🚀 Installation
+
+### 1. Clone the Repository
 
 ```bash
 # Clone the repository
@@ -29,12 +31,14 @@ git clone https://github.com/sedoglia/librelink-mcp-server-fixed.git
 cd librelink-mcp-server-fixed
 ```
 
+### 2. Install Dependencies
+
 ```bash
 # Install dependencies
 npm install
 ```
 
-### Keytar Requirements
+### 3. Install Keytar
 
 Keytar requires some system dependencies to work:
 
@@ -57,14 +61,14 @@ sudo dnf install libsecret-devel gnome-keyring
 npm install keytar
 ```
 
+### 4. Build the Project
+
 ```bash
 # Build TypeScript
 npm run build
 ```
 
-## 🔧 Configuration
-
-### 1. Configure credentials
+### 5. Configure credentials
 
 ```bash
 npm run configure
@@ -99,13 +103,13 @@ Credentials are stored securely:
 - **Encryption key**: Stored in the OS keychain
 - **JWT token**: Persisted securely to avoid repeated logins
 
-### 2. Test the connection
+### 6. Test the connection
 
 ```bash
 npm run test:connection
 ```
 
-### 3. Configure Claude Desktop
+### 7. Configure Claude Desktop
 
 Add to your Claude Desktop configuration file:
 
@@ -123,7 +127,7 @@ Add to your Claude Desktop configuration file:
 }
 ```
 
-### 4. Restart Claude Desktop
+### 8. Restart Claude Desktop
 
 Restart Claude Desktop to load the MCP server.
 
