@@ -21,7 +21,76 @@
 - **Sensor**: Active FreeStyle Libre 2 or 3
 - **Claude Desktop**: For MCP integration
 
-## 🚀 Installation
+## 🚀 Quick Installation (Precompiled Bundle)
+
+### Steps:
+
+### 1. Install Keytar (Recommended for maximum security)
+
+To use the native operating system vault (Windows Credential Manager, macOS Keychain, Linux Secret Service), install `keytar`:
+
+```bash
+npm install keytar
+```
+
+> **Note:** If `keytar` cannot be installed, the system will automatically use an encrypted file as a fallback.
+
+### 2. Download the bundle
+
+Use your browser or:
+
+```bash
+wget https://github.com/sedoglia/librelink-mcp-server-fixed/releases/download/v1.3.0/librelink-mcp-server-fixed.mcpb
+```
+
+### 3. Verify integrity
+
+Verify the integrity (optional but recommended):
+
+```bash
+wget https://github.com/sedoglia/librelink-mcp-server-fixed/releases/download/v1.3.0/librelink-mcp-server-fixed.mcpb.sha256
+sha256sum -c librelink-mcp-server-fixed.mcpb
+```
+
+### 4. Install the extension in Claude Desktop (Recommended Method)
+
+**Installation via Custom Desktop Extensions:**
+
+1. Open **Claude Desktop**
+2. Go to **Settings**
+3. Select the **Extensions** tab
+4. Click on **Advanced settings** and find the **Extension Developer** section
+5. Click on **"Install Extension…"**
+6. Select the `.mcpb` file (`librelink-mcp-server-fixed.mcpb` downloaded in step 1)
+7. Follow the on-screen instructions to complete the installation
+
+> **Note:** This is the simplest and recommended method. The extension will be automatically integrated into Claude Desktop without requiring any manual configuration.
+
+---
+
+### 5. Configure LibreLink Credentials (Secure Method - Recommended)
+
+Open a **new chat on Claude Desktop** and write the following prompt:
+
+```
+Configure LibreLink login credentials
+```
+
+Respond to the message by providing:
+- **Username:** your LibreLink email
+- **Password:** your LibreLink password
+
+The extension will automatically encrypt and securely save the credentials in the native operating system vault (Windows Credential Manager, macOS Keychain, Linux Secret Service).
+
+> **Note:** Credentials will NOT be saved in text files. They will always be encrypted and managed by the OS native vault.
+
+### 6. Restart Claude Desktop
+
+- Close the application completely
+- Reopen Claude Desktop
+- Verify in Settings → Developer the connection status ✅
+
+## 🚀 Installation (by cloning the repository with GIT)
 
 ### 1. Clone the Repository
 
