@@ -146,14 +146,14 @@ We may update this privacy policy from time to time. Changes will be documented 
 ## Open Source Transparency
 
 This project is open source under the MIT License. You can:
-- Review all source code on [GitHub](https://github.com/sedoglia/librelink-mcp-server-fixed)
+- Review all source code on [GitHub](https://github.com/sedoglia/librelink-mcp-server)
 - Verify exactly what data is collected and how it's used
 - Fork and modify the code for your own needs
 
 ## Contact
 
 For privacy-related questions or concerns:
-- **GitHub Issues**: [https://github.com/sedoglia/librelink-mcp-server-fixed/issues](https://github.com/sedoglia/librelink-mcp-server-fixed/issues)
+- **GitHub Issues**: [https://github.com/sedoglia/librelink-mcp-server/issues](https://github.com/sedoglia/librelink-mcp-server/issues)
 - **Email**: sedoglia@gmail.com
 
 ## Legal Disclaimer

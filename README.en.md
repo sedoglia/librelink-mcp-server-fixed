@@ -41,7 +41,7 @@ npm install keytar
 Use your browser or:
 
 ```bash
-wget https://github.com/sedoglia/librelink-mcp-server-fixed/releases/download/v1.3.0/librelink-mcp-server-fixed.mcpb
+wget https://github.com/sedoglia/librelink-mcp-server/releases/download/v1.3.0/librelink-mcp-server.mcpb
 ```
 
 ### 3. Verify integrity
@@ -49,8 +49,8 @@ wget https://github.com/sedoglia/librelink-mcp-server-fixed/releases/download/v1
 Verify the integrity (optional but recommended):
 
 ```bash
-wget https://github.com/sedoglia/librelink-mcp-server-fixed/releases/download/v1.3.0/librelink-mcp-server-fixed.mcpb.sha256
-sha256sum -c librelink-mcp-server-fixed.mcpb
+wget https://github.com/sedoglia/librelink-mcp-server/releases/download/v1.3.0/librelink-mcp-server.mcpb.sha256
+sha256sum -c librelink-mcp-server.mcpb
 ```
 
 ### 4. Install the extension in Claude Desktop (Recommended Method)
@@ -62,7 +62,7 @@ sha256sum -c librelink-mcp-server-fixed.mcpb
 3. Select the **Extensions** tab
 4. Click on **Advanced settings** and find the **Extension Developer** section
 5. Click on **"Install Extension…"**
-6. Select the `.mcpb` file (`librelink-mcp-server-fixed.mcpb` downloaded in step 1)
+6. Select the `.mcpb` file (`librelink-mcp-server.mcpb` downloaded in step 1)
 7. Follow the on-screen instructions to complete the installation
 
 > **Note:** This is the simplest and recommended method. The extension will be automatically integrated into Claude Desktop without requiring any manual configuration.
@@ -97,8 +97,8 @@ The extension will automatically encrypt and securely save the credentials in th
 
 ```bash
 # Clone the repository
-git clone https://github.com/sedoglia/librelink-mcp-server-fixed.git
-cd librelink-mcp-server-fixed
+git clone https://github.com/sedoglia/librelink-mcp-server.git
+cd librelink-mcp-server
 ```
 
 ### 2. Install Dependencies
@@ -191,7 +191,7 @@ Add to your Claude Desktop configuration file:
   "mcpServers": {
     "librelink": {
       "command": "node",
-      "args": ["C:/path/to/librelink-mcp-server-fixed/dist/index.js"]
+      "args": ["C:/path/to/librelink-mcp-server/dist/index.js"]
     }
   }
 }
@@ -384,7 +384,7 @@ If you encounter keychain errors:
 ## 📁 Project Structure
 
 ```
-librelink-mcp-server-fixed/
+librelink-mcp-server/
 ├── src/
 │   ├── index.ts              # Main MCP server
 │   ├── librelink-client.ts   # API client with v4.16.0 fix

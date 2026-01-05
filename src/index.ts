@@ -28,7 +28,7 @@ import { LibreLinkConfig, LibreLinkRegion, VALID_REGIONS } from './types.js';
 // Create MCP server
 const server = new Server(
   {
-    name: 'librelink-mcp-server-fixed',
+    name: 'librelink-mcp-server',
     version: '1.3.0'
   },
   {

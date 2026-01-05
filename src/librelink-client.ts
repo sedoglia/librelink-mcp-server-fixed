@@ -283,7 +283,7 @@ export class LibreLinkClient {
             throw new Error(
               `API requires minimum version ${responseData.data.minimumVersion}. ` +
               `Current version: ${this.config.clientVersion}. ` +
-              `Please update to the latest version of librelink-mcp-server-fixed.`
+              `Please update to the latest version of librelink-mcp-server.`
             );
           }
 
